@@ -76,7 +76,6 @@ public class ShiroConfig {
 
         // 配置不会被拦截的链接 顺序判断 authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问
         filterChainDefinitionMap.put("/login", "anon"); //登录接口排除
-        filterChainDefinitionMap.put("/user", "anon");
         filterChainDefinitionMap.put("/druid/**", "anon");
         filterChainDefinitionMap.put("/common/unauthorized/**", "anon");
         // 除了以上的请求外，其它请求都需要登录

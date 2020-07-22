@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.css.cssbase.moudles.user.repository.UserMapper">
+    <resultMap id="pageUserDTO" type="com.css.cssbase.moudles.user.model.UserDTO">
+        <id column="id" property="id"/>
+        <result column="real_name" property="realName"/>
+        <result column="mobile" property="mobile"/>
+        <result column="user_type" property="userType"/>
+        <result column="org_id" property="orgId"/>
+        <result column="open_flag" property="openFlag"/>
+    </resultMap>
 
+    <select id="pageUser" resultMap="pageUserDTO">
+        select
+        id,real_name,mobile,user_type,org_id,open_flag
+        from s_user
+        where del_flag = 2
+        <if test="userCondition.realName != null and userCondition.realName != ''">
+            and real_name like CONCAT('%',#{userCondition.realName},'%')
+        </if>
+    </select>
 </mapper>

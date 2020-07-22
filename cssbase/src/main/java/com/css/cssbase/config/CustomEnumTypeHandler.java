@@ -1,7 +1,9 @@
 package com.css.cssbase.config;
 
 import com.css.cssbase.base.constant.CommonEntityEnum;
+import com.css.cssbase.base.constant.DelFlagEnum;
 import com.css.cssbase.moudles.user.constant.GenderEnum;
+import com.css.cssbase.moudles.user.constant.OpenFlagEnum;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedTypes;
@@ -20,9 +22,10 @@ import java.sql.SQLException;
 
 
 @MappedTypes({
-        GenderEnum.class
+        GenderEnum.class,
+        DelFlagEnum.class,
+        OpenFlagEnum.class
 })
-@SuppressWarnings("unused")
 public class CustomEnumTypeHandler<E extends CommonEntityEnum> extends BaseTypeHandler<E> {
 
     private Class<E> type;

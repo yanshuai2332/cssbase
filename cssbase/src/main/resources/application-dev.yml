@@ -40,6 +40,7 @@ mybatis-plus:
   configuration:
     cache-enabled: false
     map-underscore-to-camel-case: true
+    default-enum-type-handler: com.css.cssbase.config.CustomEnumTypeHandler
   global-config:
     db-column-underline: true
     field-strategy: 0

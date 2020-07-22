@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.css.cssbase.base.constant.CommonConstant;
 import com.css.cssbase.base.model.LoginUser;
 import com.css.cssbase.base.util.RedisUtil;
+import com.css.cssbase.moudles.user.constant.OpenFlagEnum;
 import com.css.cssbase.moudles.user.entity.User;
 import com.css.cssbase.moudles.user.service.UserService;
 import org.apache.shiro.authc.AuthenticationException;
@@ -95,23 +96,17 @@ public class ShiroRealm extends AuthorizingRealm {
      * @param token
      */
     public LoginUser checkUserTokenIsEffect(String token) throws AuthenticationException {
-        // 解密获得username，用于和数据库进行对比
         String username = JwtUtil.getUsername(token);
         if (username == null) {
             throw new AuthenticationException("token非法无效!");
         }
-
-        // 查询用户信息
-
         User user = userService.getOne(Wrappers.<User>lambdaQuery().eq(User::getLoginName, username));
         if (user == null) {
             throw new AuthenticationException("用户不存在!");
         }
-        // 判断用户状态
-        if (user.getOpenFlag() != "1") {
+        if (user.getOpenFlag() == OpenFlagEnum.CLOSE) {
             throw new AuthenticationException("账号已被锁定,请联系管理员!");
         }
-        // 校验token是否超时失效 & 或者账号密码是否错误
         if (!jwtTokenRefresh(token, username, user.getPassword())) {
             throw new AuthenticationException("Token失效，请重新登录!");
         }

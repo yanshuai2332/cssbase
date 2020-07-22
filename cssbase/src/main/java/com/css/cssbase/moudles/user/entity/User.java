@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.css.cssbase.base.constant.DelFlagEnum;
 import com.css.cssbase.moudles.user.constant.GenderEnum;
+import com.css.cssbase.moudles.user.constant.OpenFlagEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -43,10 +45,10 @@ public class User implements Serializable {
     private String userType;
 
     @TableField(value = "del_flag")
-    private String delFlag;
+    private DelFlagEnum delFlag;
 
     @TableField(value = "open_flag")
-    private String openFlag;
+    private OpenFlagEnum openFlag;
 
     @TableField(value = "org_id")
     private String orgId;

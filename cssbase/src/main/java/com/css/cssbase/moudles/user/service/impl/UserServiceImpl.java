@@ -4,17 +4,22 @@ package com.css.cssbase.moudles.user.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.css.cssbase.base.constant.DelFlagEnum;
 import com.css.cssbase.base.shiro.JwtUtil;
 import com.css.cssbase.base.shiro.UserContext;
 import com.css.cssbase.base.shiro.UserDetails;
 import com.css.cssbase.base.util.RedisUtil;
+import com.css.cssbase.moudles.user.constant.OpenFlagEnum;
 import com.css.cssbase.moudles.user.constant.UserResponseEnum;
 import com.css.cssbase.moudles.user.entity.User;
 import com.css.cssbase.moudles.user.exception.UserException;
 import com.css.cssbase.moudles.user.model.LoginCondition;
 import com.css.cssbase.moudles.user.model.UserCondition;
+import com.css.cssbase.moudles.user.model.UserDTO;
 import com.css.cssbase.moudles.user.repository.UserMapper;
 import com.css.cssbase.moudles.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +27,9 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
+import java.util.List;
 import java.util.UUID;
 
 
@@ -57,7 +64,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
     }
 
     @Override
-    public void saveUser(UserCondition userCondition){
+    public void saveUser(UserCondition userCondition) throws UserException {
+        List<User> sameLoginNameUsers = list(Wrappers.<User>lambdaQuery().eq(User::getLoginName, userCondition.getLoginName()));
+        if(!CollectionUtils.isEmpty(sameLoginNameUsers)){
+            throw new UserException(UserResponseEnum.REPEAT_MOBILE);
+        }
         User user = new User();
         user.setRealName(userCondition.getRealName());
         user.setLoginName(userCondition.getLoginName());
@@ -67,6 +78,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
         user.setPassword(saltPassword);
         user.setGender(userCondition.getGender());
         user.setMobile(userCondition.getMobile());
+        user.setUserType(userCondition.getUserType());
+        user.setDelFlag(DelFlagEnum.NOT_DELETE);
+        user.setOpenFlag(OpenFlagEnum.OPEN);
         //TODO 对orgId进行检测
         user.setOrgId(userCondition.getOrgId());
         userMapper.insert(user);
@@ -80,6 +94,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
     @Override
     public User getUser(Long id) {
         return getById(id);
+    }
+
+    @Override
+    public IPage<UserDTO> pageUser(UserCondition userCondition,Integer pageNo, Integer pageSize) {
+        Page<UserDTO> page = new Page<UserDTO>(pageNo, pageSize);
+        return userMapper.pageUser(page,userCondition);
     }
 
 }
