@@ -1,7 +1,7 @@
 package com.css.cssbase.moudles.user.model;
 
 import com.css.cssbase.moudles.user.constant.GenderEnum;
-import com.css.cssbase.moudles.user.constant.OpenFlagEnum;
+import com.css.cssbase.base.constant.OpenFlagEnum;
 import lombok.Data;
 
 /**

@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.css.cssbase.base.constant.CommonConstant;
 import com.css.cssbase.base.model.LoginUser;
 import com.css.cssbase.base.util.RedisUtil;
-import com.css.cssbase.moudles.user.constant.OpenFlagEnum;
+import com.css.cssbase.base.constant.OpenFlagEnum;
 import com.css.cssbase.moudles.user.entity.User;
 import com.css.cssbase.moudles.user.service.UserService;
 import org.apache.shiro.authc.AuthenticationException;

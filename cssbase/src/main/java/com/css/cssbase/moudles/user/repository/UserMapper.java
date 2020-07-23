@@ -9,7 +9,6 @@ import com.css.cssbase.moudles.user.model.UserCondition;
 import com.css.cssbase.moudles.user.model.UserDTO;
 import org.apache.ibatis.annotations.Param;
 
-
 public interface UserMapper extends BaseMapper<User> {
 
     IPage<UserDTO> pageUser(Page page,@Param("userCondition") UserCondition userCondition);

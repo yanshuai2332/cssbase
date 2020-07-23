@@ -3,7 +3,7 @@ package com.css.cssbase.config;
 import com.css.cssbase.base.constant.CommonEntityEnum;
 import com.css.cssbase.base.constant.DelFlagEnum;
 import com.css.cssbase.moudles.user.constant.GenderEnum;
-import com.css.cssbase.moudles.user.constant.OpenFlagEnum;
+import com.css.cssbase.base.constant.OpenFlagEnum;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedTypes;

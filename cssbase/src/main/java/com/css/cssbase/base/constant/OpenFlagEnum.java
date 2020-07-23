@@ -1,6 +1,5 @@
-package com.css.cssbase.moudles.user.constant;
+package com.css.cssbase.base.constant;
 
-import com.css.cssbase.base.constant.CommonEntityEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 /**

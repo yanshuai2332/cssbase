@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.css.cssbase.base.constant.DelFlagEnum;
 import com.css.cssbase.moudles.user.constant.GenderEnum;
-import com.css.cssbase.moudles.user.constant.OpenFlagEnum;
+import com.css.cssbase.base.constant.OpenFlagEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

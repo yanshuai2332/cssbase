@@ -8,7 +8,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 
 @ServletComponentScan
 @SpringBootApplication
-@MapperScan("com.css.cssbase.moudles.user.repository")
+@MapperScan("com.css.cssbase.moudles.*.repository")
 public class Application {
 
     public static void main(String[] args) {
