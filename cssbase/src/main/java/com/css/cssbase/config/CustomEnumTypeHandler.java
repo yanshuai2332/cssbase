@@ -17,10 +17,8 @@ import java.sql.SQLException;
  * @author yanshuai
  * @version 1.0
  * @date 2020/07/13
- * @description
+ * @description 枚举数据库转换类
  */
-
-
 @MappedTypes({
         GenderEnum.class,
         DelFlagEnum.class,
